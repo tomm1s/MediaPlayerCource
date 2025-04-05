@@ -29,7 +29,7 @@ namespace OSmetod {
 			//
 			//TODO: Add the constructor code here
 			//
-			mediaPlayer = gcnew MediaPlayer(this->axWindowsMediaPlayer1,this->trackBar1);
+			mediaPlayer = gcnew MediaPlayer(this->WindowsMediaPlayer,this->flpVolumeBar);
 			mediaPlayer->SetVolumeBasedOnTime();
 //			axWindowsMediaPlayer1->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
 			this->KeyPreview = true;
@@ -58,10 +58,10 @@ namespace OSmetod {
 	protected:
 	private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiClose;
-	private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcess;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiControl;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiStart;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiStop;
-	private: System::Windows::Forms::ToolStripMenuItem^ tmsiParams;
+	private: System::Windows::Forms::ToolStripMenuItem^ tmsiPause;
 	private: System::Windows::Forms::ToolStripMenuItem^ tmsiInfo;
 	private: System::Windows::Forms::ToolStripMenuItem^ tmsiHelp;
 	private: System::Windows::Forms::ToolStripMenuItem^ tmsiAbout;
@@ -71,14 +71,14 @@ namespace OSmetod {
 	private: System::Windows::Forms::ToolStrip^ tsMain;
 
 	private: System::Windows::Forms::ToolStripButton^ tsbOpen;
-	private: System::Windows::Forms::ToolStripButton^ tsbSave;
+	private: System::Windows::Forms::ToolStripButton^ tsbPlaylist;
 
 
 
 
 	private: System::Windows::Forms::ToolStripSeparator^ toolStripSeparator1;
-	private: System::Windows::Forms::ToolStripButton^ tsbExecute;
-	private: System::Windows::Forms::ToolStripButton^ tsbCancel;
+	private: System::Windows::Forms::ToolStripButton^ tsbPlay;
+	private: System::Windows::Forms::ToolStripButton^ tsbStop;
 
 
 	private: System::Windows::Forms::ToolStripSeparator^ toolStripSeparator2;
@@ -90,33 +90,33 @@ namespace OSmetod {
 	private: System::Windows::Forms::ToolStripProgressBar^ tspMain;
 
 	private: System::Windows::Forms::ContextMenuStrip^ contextMenuStrip1;
-	private: System::Windows::Forms::ToolStripButton^ tsbexit;
-	private: System::Windows::Forms::ToolStripButton^ tsbInfo;
+	private: System::Windows::Forms::ToolStripButton^ tsbExit;
+
 	private: System::Windows::Forms::ContextMenuStrip^ contextMenuStrip2;
 	private: System::Windows::Forms::ContextMenuStrip^ contextMenuStrip3;
-	private: AxWMPLib::AxWindowsMediaPlayer^ axWindowsMediaPlayer1;
+	private: AxWMPLib::AxWindowsMediaPlayer^ WindowsMediaPlayer;
 	private: MediaPlayer^ mediaPlayer;
-	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
-	private: System::Windows::Forms::Button^ Play_button;
+	private: System::Windows::Forms::FlowLayoutPanel^ flpMain;
+	private: System::Windows::Forms::Button^ flpPlay;
 
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ flpPause;
+	private: System::Windows::Forms::Button^ flpStop;
+	private: System::Windows::Forms::Button^ flpMuteUnMute;
+	private: System::Windows::Forms::Button^ flpFullScreen;
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::TrackBar^ trackBar1;
+	private: System::Windows::Forms::TrackBar^ flpVolumeBar;
 	private: System::Windows::Forms::Timer^ timer1;
-	private: System::Windows::Forms::TrackBar^ trackBar2;
+	private: System::Windows::Forms::TrackBar^ flpSeekBar;
 	private: System::ComponentModel::IContainer^ components;
 	private: System::Windows::Forms::Timer^ timer2;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton1;
+	private: System::Windows::Forms::ToolStripButton^ tsbTime;
 
 	private: String^ selectedFolderPath;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton2;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton3;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton4;
-	private: System::Windows::Forms::ToolStripMenuItem^ âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ ïîâíîåêðàíèéÐåæèìToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripButton^ tsbPause;
+	private: System::Windows::Forms::ToolStripButton^ tsbMuteUnMute;
+	private: System::Windows::Forms::ToolStripButton^ tsbFullScreen;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiMuteUnmute;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsmiFullScreen;
 	private: DateTime^ targetDateTime;
 
 	private:
@@ -139,29 +139,28 @@ namespace OSmetod {
 			this->tsmiLoad = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsmiClose = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tsmiProcess = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiControl = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiStart = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tmsiParams = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tmsiPause = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiMuteUnmute = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiFullScreen = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiInfo = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiHelp = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiAbout = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsMain = (gcnew System::Windows::Forms::ToolStrip());
 			this->tsbOpen = (gcnew System::Windows::Forms::ToolStripButton());
-			this->tsbSave = (gcnew System::Windows::Forms::ToolStripButton());
-			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbPlaylist = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbTime = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
-			this->tsbExecute = (gcnew System::Windows::Forms::ToolStripButton());
-			this->tsbCancel = (gcnew System::Windows::Forms::ToolStripButton());
-			this->toolStripButton2 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->toolStripButton4 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbPlay = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbStop = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbPause = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbMuteUnMute = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbFullScreen = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsbAbout = (gcnew System::Windows::Forms::ToolStripButton());
-			this->tsbexit = (gcnew System::Windows::Forms::ToolStripButton());
-			this->tsbInfo = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tsbExit = (gcnew System::Windows::Forms::ToolStripButton());
 			this->imageList1 = (gcnew System::Windows::Forms::ImageList(this->components));
 			this->stMain = (gcnew System::Windows::Forms::StatusStrip());
 			this->tslInfo = (gcnew System::Windows::Forms::ToolStripStatusLabel());
@@ -169,32 +168,33 @@ namespace OSmetod {
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->contextMenuStrip2 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->contextMenuStrip3 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->axWindowsMediaPlayer1 = (gcnew AxWMPLib::AxWindowsMediaPlayer());
-			this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
-			this->Play_button = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
-			this->trackBar2 = (gcnew System::Windows::Forms::TrackBar());
+			this->WindowsMediaPlayer = (gcnew AxWMPLib::AxWindowsMediaPlayer());
+			this->flpMain = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			this->flpPlay = (gcnew System::Windows::Forms::Button());
+			this->flpPause = (gcnew System::Windows::Forms::Button());
+			this->flpStop = (gcnew System::Windows::Forms::Button());
+			this->flpMuteUnMute = (gcnew System::Windows::Forms::Button());
+			this->flpFullScreen = (gcnew System::Windows::Forms::Button());
+			this->flpVolumeBar = (gcnew System::Windows::Forms::TrackBar());
+			this->flpSeekBar = (gcnew System::Windows::Forms::TrackBar());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->mnsMain->SuspendLayout();
 			this->tsMain->SuspendLayout();
 			this->stMain->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->axWindowsMediaPlayer1))->BeginInit();
-			this->flowLayoutPanel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->WindowsMediaPlayer))->BeginInit();
+			this->flpMain->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->flpVolumeBar))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->flpSeekBar))->BeginInit();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// mnsMain
 			// 
+			this->mnsMain->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
 			this->mnsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->tsmiFile, this->tsmiProcess,
+				this->tsmiFile, this->tsmiControl,
 					this->tmsiInfo
 			});
 			this->mnsMain->Location = System::Drawing::Point(0, 0);
@@ -216,31 +216,31 @@ namespace OSmetod {
 			// tsmiLoad
 			// 
 			this->tsmiLoad->Name = L"tsmiLoad";
-			this->tsmiLoad->Size = System::Drawing::Size(124, 22);
+			this->tsmiLoad->Size = System::Drawing::Size(122, 22);
 			this->tsmiLoad->Text = L"Â³äêðèòè";
 			this->tsmiLoad->Click += gcnew System::EventHandler(this, &frmMain::tsmiLoad_Click);
 			// 
 			// toolStripMenuItem1
 			// 
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
-			this->toolStripMenuItem1->Size = System::Drawing::Size(121, 6);
+			this->toolStripMenuItem1->Size = System::Drawing::Size(119, 6);
 			// 
 			// tsmiClose
 			// 
 			this->tsmiClose->Name = L"tsmiClose";
-			this->tsmiClose->Size = System::Drawing::Size(124, 22);
+			this->tsmiClose->Size = System::Drawing::Size(122, 22);
 			this->tsmiClose->Text = L"Çàêðèòè";
 			this->tsmiClose->Click += gcnew System::EventHandler(this, &frmMain::tsbexit_Click);
 			// 
-			// tsmiProcess
+			// tsmiControl
 			// 
-			this->tsmiProcess->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->tsmiControl->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->tsmiStart,
-					this->tsmiStop, this->tmsiParams, this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem, this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem
+					this->tsmiStop, this->tmsiPause, this->tsmiMuteUnmute, this->tsmiFullScreen
 			});
-			this->tsmiProcess->Name = L"tsmiProcess";
-			this->tsmiProcess->Size = System::Drawing::Size(72, 20);
-			this->tsmiProcess->Text = L"Êîíòðîëü";
+			this->tsmiControl->Name = L"tsmiControl";
+			this->tsmiControl->Size = System::Drawing::Size(72, 20);
+			this->tsmiControl->Text = L"Êîíòðîëü";
 			// 
 			// tsmiStart
 			// 
@@ -256,26 +256,26 @@ namespace OSmetod {
 			this->tsmiStop->Text = L"Çóïèíèòè";
 			this->tsmiStop->Click += gcnew System::EventHandler(this, &frmMain::tsmiStop_Click);
 			// 
-			// tmsiParams
+			// tmsiPause
 			// 
-			this->tmsiParams->Name = L"tmsiParams";
-			this->tmsiParams->Size = System::Drawing::Size(206, 22);
-			this->tmsiParams->Text = L"Ïàóçà";
-			this->tmsiParams->Click += gcnew System::EventHandler(this, &frmMain::tmsiParams_Click);
+			this->tmsiPause->Name = L"tmsiPause";
+			this->tmsiPause->Size = System::Drawing::Size(206, 22);
+			this->tmsiPause->Text = L"Ïàóçà";
+			this->tmsiPause->Click += gcnew System::EventHandler(this, &frmMain::tmsiParams_Click);
 			// 
-			// âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem
+			// tsmiMuteUnmute
 			// 
-			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Name = L"âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem";
-			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Size = System::Drawing::Size(206, 22);
-			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Text = L"Âèìêíóòè\\Óâ³êíóòè çâóê";
-			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMain::âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem_Click);
+			this->tsmiMuteUnmute->Name = L"tsmiMuteUnmute";
+			this->tsmiMuteUnmute->Size = System::Drawing::Size(206, 22);
+			this->tsmiMuteUnmute->Text = L"Âèìêíóòè\\Óâ³êíóòè çâóê";
+			this->tsmiMuteUnmute->Click += gcnew System::EventHandler(this, &frmMain::âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem_Click);
 			// 
-			// ïîâíîåêðàíèéÐåæèìToolStripMenuItem
+			// tsmiFullScreen
 			// 
-			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Name = L"ïîâíîåêðàíèéÐåæèìToolStripMenuItem";
-			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Size = System::Drawing::Size(206, 22);
-			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Text = L"Ïîâíîåêðàíèé ðåæèì";
-			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMain::ïîâíîåêðàíèéÐåæèìToolStripMenuItem_Click);
+			this->tsmiFullScreen->Name = L"tsmiFullScreen";
+			this->tsmiFullScreen->Size = System::Drawing::Size(206, 22);
+			this->tsmiFullScreen->Text = L"Ïîâíîåêðàíèé ðåæèì";
+			this->tsmiFullScreen->Click += gcnew System::EventHandler(this, &frmMain::ïîâíîåêðàíèéÐåæèìToolStripMenuItem_Click);
 			// 
 			// tmsiInfo
 			// 
@@ -287,24 +287,24 @@ namespace OSmetod {
 			// tmsiHelp
 			// 
 			this->tmsiHelp->Name = L"tmsiHelp";
-			this->tmsiHelp->Size = System::Drawing::Size(180, 22);
+			this->tmsiHelp->Size = System::Drawing::Size(154, 22);
 			this->tmsiHelp->Text = L"Äîïîìîãà";
 			this->tmsiHelp->Click += gcnew System::EventHandler(this, &frmMain::tmsiHelp_Click);
 			// 
 			// tmsiAbout
 			// 
 			this->tmsiAbout->Name = L"tmsiAbout";
-			this->tmsiAbout->Size = System::Drawing::Size(180, 22);
+			this->tmsiAbout->Size = System::Drawing::Size(154, 22);
 			this->tmsiAbout->Text = L"Ïðî ïðîãðàìó";
 			this->tmsiAbout->Click += gcnew System::EventHandler(this, &frmMain::tmsiAbout_Click);
 			// 
 			// tsMain
 			// 
 			this->tsMain->ImageScalingSize = System::Drawing::Size(32, 32);
-			this->tsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(13) {
-				this->tsbOpen, this->tsbSave,
-					this->toolStripButton1, this->toolStripSeparator1, this->tsbExecute, this->tsbCancel, this->toolStripButton2, this->toolStripButton3,
-					this->toolStripButton4, this->toolStripSeparator2, this->tsbAbout, this->tsbexit, this->tsbInfo
+			this->tsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(12) {
+				this->tsbOpen, this->tsbPlaylist,
+					this->tsbTime, this->toolStripSeparator1, this->tsbPlay, this->tsbStop, this->tsbPause, this->tsbMuteUnMute, this->tsbFullScreen,
+					this->toolStripSeparator2, this->tsbAbout, this->tsbExit
 			});
 			this->tsMain->Location = System::Drawing::Point(0, 24);
 			this->tsMain->Name = L"tsMain";
@@ -319,83 +319,91 @@ namespace OSmetod {
 			this->tsbOpen->Name = L"tsbOpen";
 			this->tsbOpen->Size = System::Drawing::Size(36, 36);
 			this->tsbOpen->Text = L"toolStripButton4";
+			this->tsbOpen->ToolTipText = L"Open";
 			this->tsbOpen->Click += gcnew System::EventHandler(this, &frmMain::tsbOpen_Click);
 			// 
-			// tsbSave
+			// tsbPlaylist
 			// 
-			this->tsbSave->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbSave->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbSave.Image")));
-			this->tsbSave->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbSave->Name = L"tsbSave";
-			this->tsbSave->Size = System::Drawing::Size(36, 36);
-			this->tsbSave->Text = L"toolStripButton3";
-			this->tsbSave->Click += gcnew System::EventHandler(this, &frmMain::tsbSave_Click);
+			this->tsbPlaylist->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbPlaylist->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbPlaylist.Image")));
+			this->tsbPlaylist->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbPlaylist->Name = L"tsbPlaylist";
+			this->tsbPlaylist->Size = System::Drawing::Size(36, 36);
+			this->tsbPlaylist->Text = L"toolStripButton3";
+			this->tsbPlaylist->ToolTipText = L"Playlist";
+			this->tsbPlaylist->Click += gcnew System::EventHandler(this, &frmMain::tsbSave_Click);
 			// 
-			// toolStripButton1
+			// tsbTime
 			// 
-			this->toolStripButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton1.Image")));
-			this->toolStripButton1->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton1->Name = L"toolStripButton1";
-			this->toolStripButton1->Size = System::Drawing::Size(36, 36);
-			this->toolStripButton1->Text = L"toolStripButton1";
-			this->toolStripButton1->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton1_Click);
+			this->tsbTime->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbTime->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbTime.Image")));
+			this->tsbTime->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbTime->Name = L"tsbTime";
+			this->tsbTime->Size = System::Drawing::Size(36, 36);
+			this->tsbTime->Text = L"toolStripButton1";
+			this->tsbTime->ToolTipText = L"Time";
+			this->tsbTime->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton1_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
 			this->toolStripSeparator1->Size = System::Drawing::Size(6, 39);
 			// 
-			// tsbExecute
+			// tsbPlay
 			// 
-			this->tsbExecute->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbExecute->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbExecute.Image")));
-			this->tsbExecute->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbExecute->Name = L"tsbExecute";
-			this->tsbExecute->Size = System::Drawing::Size(36, 36);
-			this->tsbExecute->Text = L"toolStripButton5";
-			this->tsbExecute->Click += gcnew System::EventHandler(this, &frmMain::tsbExecute_Click);
+			this->tsbPlay->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbPlay->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbPlay.Image")));
+			this->tsbPlay->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbPlay->Name = L"tsbPlay";
+			this->tsbPlay->Size = System::Drawing::Size(36, 36);
+			this->tsbPlay->Text = L"toolStripButton5";
+			this->tsbPlay->ToolTipText = L"Play";
+			this->tsbPlay->Click += gcnew System::EventHandler(this, &frmMain::tsbExecute_Click);
 			// 
-			// tsbCancel
+			// tsbStop
 			// 
-			this->tsbCancel->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbCancel->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbCancel.Image")));
-			this->tsbCancel->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbCancel->Name = L"tsbCancel";
-			this->tsbCancel->Size = System::Drawing::Size(36, 36);
-			this->tsbCancel->Text = L"toolStripButton6";
-			this->tsbCancel->Click += gcnew System::EventHandler(this, &frmMain::tsbCancel_Click);
+			this->tsbStop->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbStop->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbStop.Image")));
+			this->tsbStop->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbStop->Name = L"tsbStop";
+			this->tsbStop->Size = System::Drawing::Size(36, 36);
+			this->tsbStop->Text = L"toolStripButton6";
+			this->tsbStop->ToolTipText = L"Stop";
+			this->tsbStop->Click += gcnew System::EventHandler(this, &frmMain::tsbCancel_Click);
 			// 
-			// toolStripButton2
+			// tsbPause
 			// 
-			this->toolStripButton2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->toolStripButton2->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton2.Image")));
-			this->toolStripButton2->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton2->Name = L"toolStripButton2";
-			this->toolStripButton2->Size = System::Drawing::Size(36, 36);
-			this->toolStripButton2->Text = L"toolStripButton2";
-			this->toolStripButton2->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton2_Click);
+			this->tsbPause->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->tsbPause->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbPause->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbPause.Image")));
+			this->tsbPause->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbPause->Name = L"tsbPause";
+			this->tsbPause->Size = System::Drawing::Size(36, 36);
+			this->tsbPause->Text = L"toolStripButton2";
+			this->tsbPause->ToolTipText = L"Pause";
+			this->tsbPause->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton2_Click);
 			// 
-			// toolStripButton3
+			// tsbMuteUnMute
 			// 
-			this->toolStripButton3->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton3.Image")));
-			this->toolStripButton3->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton3->Name = L"toolStripButton3";
-			this->toolStripButton3->Size = System::Drawing::Size(36, 36);
-			this->toolStripButton3->Text = L"toolStripButton3";
-			this->toolStripButton3->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton3_Click);
+			this->tsbMuteUnMute->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbMuteUnMute->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbMuteUnMute.Image")));
+			this->tsbMuteUnMute->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbMuteUnMute->Name = L"tsbMuteUnMute";
+			this->tsbMuteUnMute->Size = System::Drawing::Size(36, 36);
+			this->tsbMuteUnMute->Text = L"toolStripButton3";
+			this->tsbMuteUnMute->ToolTipText = L"Mute\\unMute";
+			this->tsbMuteUnMute->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton3_Click);
 			// 
-			// toolStripButton4
+			// tsbFullScreen
 			// 
-			this->toolStripButton4->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton4.Image")));
-			this->toolStripButton4->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton4->Name = L"toolStripButton4";
-			this->toolStripButton4->Size = System::Drawing::Size(36, 36);
-			this->toolStripButton4->Text = L"toolStripButton4";
-			this->toolStripButton4->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton4_Click);
+			this->tsbFullScreen->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbFullScreen->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbFullScreen.Image")));
+			this->tsbFullScreen->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbFullScreen->Name = L"tsbFullScreen";
+			this->tsbFullScreen->Size = System::Drawing::Size(36, 36);
+			this->tsbFullScreen->Text = L"toolStripButton4";
+			this->tsbFullScreen->ToolTipText = L"FullScreen";
+			this->tsbFullScreen->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton4_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -411,28 +419,20 @@ namespace OSmetod {
 			this->tsbAbout->Name = L"tsbAbout";
 			this->tsbAbout->Size = System::Drawing::Size(36, 36);
 			this->tsbAbout->Text = L"toolStripButton1";
+			this->tsbAbout->ToolTipText = L"Info";
 			this->tsbAbout->Click += gcnew System::EventHandler(this, &frmMain::tmsiAbout_Click);
 			// 
 			// tsbexit
 			// 
-			this->tsbexit->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbexit->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbexit.Image")));
-			this->tsbexit->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbexit->Name = L"tsbexit";
-			this->tsbexit->Size = System::Drawing::Size(36, 36);
-			this->tsbexit->Text = L"Start";
-			this->tsbexit->ToolTipText = L"Example";
-			this->tsbexit->Click += gcnew System::EventHandler(this, &frmMain::tsbexit_Click);
-			// 
-			// tsbInfo
-			// 
-			this->tsbInfo->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbInfo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbInfo.Image")));
-			this->tsbInfo->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbInfo->Name = L"tsbInfo";
-			this->tsbInfo->Size = System::Drawing::Size(36, 36);
-			this->tsbInfo->Text = L"Info";
-			this->tsbInfo->Click += gcnew System::EventHandler(this, &frmMain::tsbInfo_Click);
+			this->tsbExit->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->tsbExit->DoubleClickEnabled = true;
+			this->tsbExit->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbexit.Image")));
+			this->tsbExit->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbExit->Name = L"tsbexit";
+			this->tsbExit->Size = System::Drawing::Size(36, 36);
+			this->tsbExit->Text = L"Exit";
+			this->tsbExit->ToolTipText = L"Exit";
+			this->tsbExit->Click += gcnew System::EventHandler(this, &frmMain::tsbexit_Click);
 			// 
 			// imageList1
 			// 
@@ -485,118 +485,118 @@ namespace OSmetod {
 			// 
 			// axWindowsMediaPlayer1
 			// 
-			this->axWindowsMediaPlayer1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->axWindowsMediaPlayer1->Enabled = true;
-			this->axWindowsMediaPlayer1->Location = System::Drawing::Point(0, 0);
-			this->axWindowsMediaPlayer1->Name = L"axWindowsMediaPlayer1";
-			this->axWindowsMediaPlayer1->OcxState = (cli::safe_cast<System::Windows::Forms::AxHost::State^>(resources->GetObject(L"axWindowsMediaPlayer1.OcxState")));
-			this->axWindowsMediaPlayer1->Size = System::Drawing::Size(768, 418);
-			this->axWindowsMediaPlayer1->TabIndex = 0;
-			this->axWindowsMediaPlayer1->OpenStateChange += gcnew AxWMPLib::_WMPOCXEvents_OpenStateChangeEventHandler(this, &frmMain::axWindowsMediaPlayer1_OpenStateChange);
-			this->axWindowsMediaPlayer1->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
-			this->axWindowsMediaPlayer1->MediaChange += gcnew AxWMPLib::_WMPOCXEvents_MediaChangeEventHandler(this, &frmMain::axWindowsMediaPlayer1_MediaChange);
-			this->axWindowsMediaPlayer1->Enter += gcnew System::EventHandler(this, &frmMain::axWindowsMediaPlayer1_Enter_1);
+			this->WindowsMediaPlayer->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->WindowsMediaPlayer->Enabled = true;
+			this->WindowsMediaPlayer->Location = System::Drawing::Point(0, 0);
+			this->WindowsMediaPlayer->Name = L"axWindowsMediaPlayer1";
+			this->WindowsMediaPlayer->OcxState = (cli::safe_cast<System::Windows::Forms::AxHost::State^>(resources->GetObject(L"axWindowsMediaPlayer1.OcxState")));
+			this->WindowsMediaPlayer->Size = System::Drawing::Size(768, 418);
+			this->WindowsMediaPlayer->TabIndex = 0;
+			this->WindowsMediaPlayer->OpenStateChange += gcnew AxWMPLib::_WMPOCXEvents_OpenStateChangeEventHandler(this, &frmMain::axWindowsMediaPlayer1_OpenStateChange);
+			this->WindowsMediaPlayer->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
+			this->WindowsMediaPlayer->MediaChange += gcnew AxWMPLib::_WMPOCXEvents_MediaChangeEventHandler(this, &frmMain::axWindowsMediaPlayer1_MediaChange);
+			this->WindowsMediaPlayer->Enter += gcnew System::EventHandler(this, &frmMain::axWindowsMediaPlayer1_Enter_1);
 			// 
 			// flowLayoutPanel1
 			// 
-			this->flowLayoutPanel1->BackColor = System::Drawing::Color::Transparent;
-			this->flowLayoutPanel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->flowLayoutPanel1->Controls->Add(this->Play_button);
-			this->flowLayoutPanel1->Controls->Add(this->button2);
-			this->flowLayoutPanel1->Controls->Add(this->button3);
-			this->flowLayoutPanel1->Controls->Add(this->button4);
-			this->flowLayoutPanel1->Controls->Add(this->button5);
-			this->flowLayoutPanel1->Controls->Add(this->trackBar1);
-			this->flowLayoutPanel1->Controls->Add(this->trackBar2);
-			this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->flowLayoutPanel1->Location = System::Drawing::Point(0, 386);
-			this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			this->flowLayoutPanel1->Size = System::Drawing::Size(768, 32);
-			this->flowLayoutPanel1->TabIndex = 6;
-			this->flowLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmMain::flowLayoutPanel1_Paint);
+			this->flpMain->BackColor = System::Drawing::Color::Transparent;
+			this->flpMain->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->flpMain->Controls->Add(this->flpPlay);
+			this->flpMain->Controls->Add(this->flpPause);
+			this->flpMain->Controls->Add(this->flpStop);
+			this->flpMain->Controls->Add(this->flpMuteUnMute);
+			this->flpMain->Controls->Add(this->flpFullScreen);
+			this->flpMain->Controls->Add(this->flpVolumeBar);
+			this->flpMain->Controls->Add(this->flpSeekBar);
+			this->flpMain->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->flpMain->Location = System::Drawing::Point(0, 386);
+			this->flpMain->Name = L"flowLayoutPanel1";
+			this->flpMain->Size = System::Drawing::Size(768, 32);
+			this->flpMain->TabIndex = 6;
+			this->flpMain->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmMain::flowLayoutPanel1_Paint);
 			// 
 			// Play_button
 			// 
-			this->Play_button->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Play_button.BackgroundImage")));
-			this->Play_button->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->Play_button->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->Play_button->Location = System::Drawing::Point(3, 3);
-			this->Play_button->Name = L"Play_button";
-			this->Play_button->Size = System::Drawing::Size(48, 23);
-			this->Play_button->TabIndex = 1;
-			this->Play_button->UseVisualStyleBackColor = true;
-			this->Play_button->Click += gcnew System::EventHandler(this, &frmMain::Play_button_Click);
+			this->flpPlay->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Play_button.BackgroundImage")));
+			this->flpPlay->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->flpPlay->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->flpPlay->Location = System::Drawing::Point(3, 3);
+			this->flpPlay->Name = L"Play_button";
+			this->flpPlay->Size = System::Drawing::Size(48, 23);
+			this->flpPlay->TabIndex = 1;
+			this->flpPlay->UseVisualStyleBackColor = true;
+			this->flpPlay->Click += gcnew System::EventHandler(this, &frmMain::Play_button_Click);
 			// 
 			// button2
 			// 
-			this->button2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.BackgroundImage")));
-			this->button2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->button2->Location = System::Drawing::Point(57, 3);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(56, 23);
-			this->button2->TabIndex = 2;
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &frmMain::button2_Click);
+			this->flpPause->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.BackgroundImage")));
+			this->flpPause->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->flpPause->Location = System::Drawing::Point(57, 3);
+			this->flpPause->Name = L"button2";
+			this->flpPause->Size = System::Drawing::Size(56, 23);
+			this->flpPause->TabIndex = 2;
+			this->flpPause->UseVisualStyleBackColor = true;
+			this->flpPause->Click += gcnew System::EventHandler(this, &frmMain::button2_Click);
 			// 
 			// button3
 			// 
-			this->button3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.BackgroundImage")));
-			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->button3->Location = System::Drawing::Point(119, 3);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
-			this->button3->TabIndex = 3;
-			this->button3->Text = L"Stop";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &frmMain::button3_Click);
+			this->flpStop->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.BackgroundImage")));
+			this->flpStop->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->flpStop->Location = System::Drawing::Point(119, 3);
+			this->flpStop->Name = L"button3";
+			this->flpStop->Size = System::Drawing::Size(75, 23);
+			this->flpStop->TabIndex = 3;
+			this->flpStop->Text = L"Stop";
+			this->flpStop->UseVisualStyleBackColor = true;
+			this->flpStop->Click += gcnew System::EventHandler(this, &frmMain::button3_Click);
 			// 
 			// button4
 			// 
-			this->button4->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.BackgroundImage")));
-			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->button4->Location = System::Drawing::Point(200, 3);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
-			this->button4->TabIndex = 4;
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &frmMain::button4_Click);
+			this->flpMuteUnMute->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.BackgroundImage")));
+			this->flpMuteUnMute->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->flpMuteUnMute->Location = System::Drawing::Point(200, 3);
+			this->flpMuteUnMute->Name = L"button4";
+			this->flpMuteUnMute->Size = System::Drawing::Size(75, 23);
+			this->flpMuteUnMute->TabIndex = 4;
+			this->flpMuteUnMute->UseVisualStyleBackColor = true;
+			this->flpMuteUnMute->Click += gcnew System::EventHandler(this, &frmMain::button4_Click);
 			// 
 			// button5
 			// 
-			this->button5->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.BackgroundImage")));
-			this->button5->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->button5->Location = System::Drawing::Point(281, 3);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 23);
-			this->button5->TabIndex = 5;
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &frmMain::button5_Click);
+			this->flpFullScreen->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.BackgroundImage")));
+			this->flpFullScreen->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
+			this->flpFullScreen->Location = System::Drawing::Point(281, 3);
+			this->flpFullScreen->Name = L"button5";
+			this->flpFullScreen->Size = System::Drawing::Size(75, 23);
+			this->flpFullScreen->TabIndex = 5;
+			this->flpFullScreen->UseVisualStyleBackColor = true;
+			this->flpFullScreen->Click += gcnew System::EventHandler(this, &frmMain::button5_Click);
 			// 
 			// trackBar1
 			// 
-			this->trackBar1->AutoSize = false;
-			this->trackBar1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->trackBar1->Location = System::Drawing::Point(362, 3);
-			this->trackBar1->Name = L"trackBar1";
-			this->trackBar1->Size = System::Drawing::Size(104, 23);
-			this->trackBar1->TabIndex = 6;
-			this->trackBar1->Scroll += gcnew System::EventHandler(this, &frmMain::volumeBar_Scroll);
+			this->flpVolumeBar->AutoSize = false;
+			this->flpVolumeBar->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->flpVolumeBar->Location = System::Drawing::Point(362, 3);
+			this->flpVolumeBar->Name = L"trackBar1";
+			this->flpVolumeBar->Size = System::Drawing::Size(104, 23);
+			this->flpVolumeBar->TabIndex = 6;
+			this->flpVolumeBar->Scroll += gcnew System::EventHandler(this, &frmMain::volumeBar_Scroll);
 			// 
 			// trackBar2
 			// 
-			this->trackBar2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->trackBar2->Location = System::Drawing::Point(472, 3);
-			this->trackBar2->Maximum = 100;
-			this->trackBar2->Name = L"trackBar2";
-			this->trackBar2->Size = System::Drawing::Size(104, 23);
-			this->trackBar2->TabIndex = 7;
-			this->trackBar2->Scroll += gcnew System::EventHandler(this, &frmMain::seekBar_Scroll);
+			this->flpSeekBar->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->flpSeekBar->Location = System::Drawing::Point(472, 3);
+			this->flpSeekBar->Maximum = 100;
+			this->flpSeekBar->Name = L"trackBar2";
+			this->flpSeekBar->Size = System::Drawing::Size(104, 23);
+			this->flpSeekBar->TabIndex = 7;
+			this->flpSeekBar->Scroll += gcnew System::EventHandler(this, &frmMain::seekBar_Scroll);
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
-			this->panel1->Controls->Add(this->flowLayoutPanel1);
-			this->panel1->Controls->Add(this->axWindowsMediaPlayer1);
+			this->panel1->Controls->Add(this->flpMain);
+			this->panel1->Controls->Add(this->WindowsMediaPlayer);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 63);
 			this->panel1->Name = L"panel1";
@@ -631,11 +631,11 @@ namespace OSmetod {
 			this->tsMain->PerformLayout();
 			this->stMain->ResumeLayout(false);
 			this->stMain->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->axWindowsMediaPlayer1))->EndInit();
-			this->flowLayoutPanel1->ResumeLayout(false);
-			this->flowLayoutPanel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->WindowsMediaPlayer))->EndInit();
+			this->flpMain->ResumeLayout(false);
+			this->flpMain->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->flpVolumeBar))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->flpSeekBar))->EndInit();
 			this->panel1->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -696,12 +696,12 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 		mediaPlayer->ToggleMute();
 		// Update button appearance based on mute state
 		if (mediaPlayer->IsMuted()) {
-			button4->BackgroundImage = Image::FromFile("sound_off.png");
-			button4->BackgroundImageLayout = ImageLayout::Zoom;
+			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_off.png");
+			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 		else {
-			button4->BackgroundImage = Image::FromFile("sound_on.png");
-			button4->BackgroundImageLayout = ImageLayout::Zoom;
+			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_on.png");
+			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 	}
 }
@@ -709,18 +709,18 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 
 
 private: System::Void volumeBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
-	mediaPlayer->Volume = trackBar1->Value;
+	mediaPlayer->Volume = flpVolumeBar->Value;
 }
 	   void domediaposchange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_PositionChangeEvent^ e) {
-		   if (trackBar2->Focused==false)
-			trackBar2->Value = e->newPosition;
+		   if (flpSeekBar->Focused==false)
+			flpSeekBar->Value = e->newPosition;
 	   }
 
 private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-	if (axWindowsMediaPlayer1->currentMedia != nullptr &&
-		axWindowsMediaPlayer1->playState == WMPLib::WMPPlayState::wmppsPlaying) {
+	if (WindowsMediaPlayer->currentMedia != nullptr &&
+		WindowsMediaPlayer->playState == WMPLib::WMPPlayState::wmppsPlaying) {
 		if ((int)duration == 0) return;
-		double currentPosition = axWindowsMediaPlayer1->Ctlcontrols->currentPosition;
+		double currentPosition = WindowsMediaPlayer->Ctlcontrols->currentPosition;
 		if (currentPosition >= 0) {
 			int progress = (int)((currentPosition / duration) * 100);
 			progress = Math::Max(0, Math::Min(100, progress));
@@ -731,26 +731,26 @@ private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) 
 			tspMain->Value = progress;
 
 			// Îíîâëþºìî trackBar2 ò³ëüêè ÿêùî êîðèñòóâà÷ íå ïåðåñóâàº éîãî
-				trackBar2->Minimum = 0;
-				trackBar2->Maximum = 100;
-				trackBar2->Value = progress;
+				flpSeekBar->Minimum = 0;
+				flpSeekBar->Maximum = 100;
+				flpSeekBar->Value = progress;
 
 		}
 		else {
 			tspMain->Value = 0;
-			trackBar2->Value = 0;
+			flpSeekBar->Value = 0;
 		}
 	}
 	else {
 		tspMain->Value = 0;
-		trackBar2->Value = 0;
+		flpSeekBar->Value = 0;
 	}
 }
 private: System::Void seekBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
-	if (axWindowsMediaPlayer1->currentMedia != nullptr) {
+	if (WindowsMediaPlayer->currentMedia != nullptr) {
 			isTrackBar2Scrolling = true; // Ïî÷èíàºìî ïåðåìîòóâàííÿ
-			double newPosition = (trackBar2->Value / 100.0) * duration;
-			axWindowsMediaPlayer1->Ctlcontrols->currentPosition = newPosition;
+			double newPosition = (flpSeekBar->Value / 100.0) * duration;
+			WindowsMediaPlayer->Ctlcontrols->currentPosition = newPosition;
 
 			// Îíîâëþºìî tspMain âðó÷íó, ùîá â³äîáðàçèòè íîâó ïîçèö³þ
 			int progress = (int)((newPosition / duration) * 100);
@@ -763,9 +763,9 @@ private: System::Void seekBar_Scroll(System::Object^ sender, System::EventArgs^ 
 private: System::Void axWindowsMediaPlayer1_MediaChange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_MediaChangeEvent^ e) {
 }
 private: System::Void axWindowsMediaPlayer1_OpenStateChange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_OpenStateChangeEvent^ e) {
-	WMPLib::WMPOpenState state = axWindowsMediaPlayer1->openState;
+	WMPLib::WMPOpenState state = WindowsMediaPlayer->openState;
 	if (state == WMPLib::WMPOpenState::wmposMediaOpen) {
-		duration = axWindowsMediaPlayer1->currentMedia->duration;
+		duration = WindowsMediaPlayer->currentMedia->duration;
 		timer1->Start();
 	}
 }
@@ -840,12 +840,12 @@ private: System::Void toolStripButton3_Click(System::Object^ sender, System::Eve
 		mediaPlayer->ToggleMute();
 		// Update button appearance based on mute state
 		if (mediaPlayer->IsMuted()) {
-			button4->BackgroundImage = Image::FromFile("sound_off.png");
-			button4->BackgroundImageLayout = ImageLayout::Zoom;
+			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_off.png");
+			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 		else {
-			button4->BackgroundImage = Image::FromFile("sound_on.png");
-			button4->BackgroundImageLayout = ImageLayout::Zoom;
+			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_on.png");
+			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 	}
 }
@@ -876,12 +876,12 @@ private: System::Void âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem_Click(System::Object
 		mediaPlayer->ToggleMute();
 		// Update button appearance based on mute state
 		if (mediaPlayer->IsMuted()) {
-			button4->BackgroundImage = Image::FromFile("sound_off.png");
-			button4->BackgroundImageLayout = ImageLayout::Zoom;
+			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_off.png");
+			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 		else {
-			button4->BackgroundImage = Image::FromFile("sound_on.png");
-			button4->BackgroundImageLayout = ImageLayout::Zoom;
+			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_on.png");
+			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 	}
 }
