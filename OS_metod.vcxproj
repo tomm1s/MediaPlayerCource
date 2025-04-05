@@ -140,11 +140,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CalendarPicker.cpp" />
     <ClCompile Include="Mediaplayer.cpp" />
     <ClCompile Include="frmAbout.cpp" />
     <ClCompile Include="frmMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CalendarPicker.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MediaPlayer.h" />
     <ClInclude Include="frmAbout.h">
       <FileType>CppForm</FileType>
@@ -155,6 +159,9 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CalendarPicker.resx">
+      <DependentUpon>CalendarPicker.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.h</DependentUpon>
     </EmbeddedResource>

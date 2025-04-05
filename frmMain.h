@@ -1,6 +1,7 @@
 #pragma once
 
 #include "frmAbout.h"
+#include "CalendarPicker.h"
 #include <Windows.h>
 #include "MediaPlayer.h"
 
@@ -13,6 +14,7 @@ namespace OSmetod {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace AxWMPLib;
+	using namespace OSmetod;
 
 	/// <summary>
 	/// Summary for frmMain
@@ -27,7 +29,8 @@ namespace OSmetod {
 			//
 			//TODO: Add the constructor code here
 			//
-			mediaPlayer = gcnew MediaPlayer(this->axWindowsMediaPlayer1);
+			mediaPlayer = gcnew MediaPlayer(this->axWindowsMediaPlayer1,this->trackBar1);
+			mediaPlayer->SetVolumeBasedOnTime();
 //			axWindowsMediaPlayer1->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
 		}
 
@@ -103,6 +106,11 @@ namespace OSmetod {
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::TrackBar^ trackBar2;
 	private: System::ComponentModel::IContainer^ components;
+	private: System::Windows::Forms::Timer^ timer2;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton1;
+
+	private: String^ selectedFolderPath;
+	private: DateTime^ targetDateTime;
 
 	private:
 		/// <summary>
@@ -137,6 +145,7 @@ namespace OSmetod {
 			this->tsbNew = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbOpen = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbSave = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsbExecute = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbCancel = (gcnew System::Windows::Forms::ToolStripButton());
@@ -162,6 +171,7 @@ namespace OSmetod {
 			this->trackBar2 = (gcnew System::Windows::Forms::TrackBar());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->mnsMain->SuspendLayout();
 			this->tsMain->SuspendLayout();
 			this->stMain->SuspendLayout();
@@ -277,10 +287,10 @@ namespace OSmetod {
 			// tsMain
 			// 
 			this->tsMain->ImageScalingSize = System::Drawing::Size(32, 32);
-			this->tsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(10) {
+			this->tsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(11) {
 				this->tsbNew, this->tsbOpen,
-					this->tsbSave, this->toolStripSeparator1, this->tsbExecute, this->tsbCancel, this->toolStripSeparator2, this->tsbAbout, this->tsbexit,
-					this->tsbInfo
+					this->tsbSave, this->toolStripButton1, this->toolStripSeparator1, this->tsbExecute, this->tsbCancel, this->toolStripSeparator2,
+					this->tsbAbout, this->tsbexit, this->tsbInfo
 			});
 			this->tsMain->Location = System::Drawing::Point(0, 24);
 			this->tsMain->Name = L"tsMain";
@@ -316,6 +326,17 @@ namespace OSmetod {
 			this->tsbSave->Name = L"tsbSave";
 			this->tsbSave->Size = System::Drawing::Size(36, 36);
 			this->tsbSave->Text = L"toolStripButton3";
+			this->tsbSave->Click += gcnew System::EventHandler(this, &frmMain::tsbSave_Click);
+			// 
+			// toolStripButton1
+			// 
+			this->toolStripButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton1.Image")));
+			this->toolStripButton1->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton1->Name = L"toolStripButton1";
+			this->toolStripButton1->Size = System::Drawing::Size(36, 36);
+			this->toolStripButton1->Text = L"toolStripButton1";
+			this->toolStripButton1->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton1_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -516,11 +537,10 @@ namespace OSmetod {
 			this->trackBar1->AutoSize = false;
 			this->trackBar1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->trackBar1->Location = System::Drawing::Point(362, 3);
-			this->trackBar1->Maximum = 100;
 			this->trackBar1->Name = L"trackBar1";
 			this->trackBar1->Size = System::Drawing::Size(104, 23);
 			this->trackBar1->TabIndex = 6;
-			this->trackBar1->Scroll += gcnew System::EventHandler(this, &frmMain::trackBar1_Scroll);
+			this->trackBar1->Scroll += gcnew System::EventHandler(this, &frmMain::volumeBar_Scroll);
 			// 
 			// trackBar2
 			// 
@@ -530,7 +550,7 @@ namespace OSmetod {
 			this->trackBar2->Name = L"trackBar2";
 			this->trackBar2->Size = System::Drawing::Size(104, 23);
 			this->trackBar2->TabIndex = 7;
-			this->trackBar2->Scroll += gcnew System::EventHandler(this, &frmMain::trackBar2_Scroll);
+			this->trackBar2->Scroll += gcnew System::EventHandler(this, &frmMain::seekBar_Scroll);
 			// 
 			// panel1
 			// 
@@ -547,6 +567,10 @@ namespace OSmetod {
 			// 
 			this->timer1->Tick += gcnew System::EventHandler(this, &frmMain::timer1_Tick);
 			// 
+			// timer2
+			// 
+			this->timer2->Tick += gcnew System::EventHandler(this, &frmMain::timer2_Tick);
+			// 
 			// frmMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -558,7 +582,7 @@ namespace OSmetod {
 			this->Controls->Add(this->mnsMain);
 			this->MainMenuStrip = this->mnsMain;
 			this->Name = L"frmMain";
-			this->Text = L"Головна форма";
+			this->Text = L"MediaPlayer";
 			this->Load += gcnew System::EventHandler(this, &frmMain::frmMain_Load);
 			this->mnsMain->ResumeLayout(false);
 			this->mnsMain->PerformLayout();
@@ -587,7 +611,9 @@ private: System::Void tsbExecute_Click(System::Object^ sender, System::EventArgs
 
 }
 private: System::Void tsbNew_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("New document!");
+	CalendarPicker^ calendar = gcnew CalendarPicker();
+	
+	calendar->ShowDialog(this);
 }
 private: System::Void tsbexit_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
@@ -653,7 +679,7 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 
 
 
-private: System::Void trackBar1_Scroll(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void volumeBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
 	mediaPlayer->Volume = trackBar1->Value;
 }
 	   void domediaposchange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_PositionChangeEvent^ e) {
@@ -668,7 +694,7 @@ private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) 
 		double currentPosition = axWindowsMediaPlayer1->Ctlcontrols->currentPosition;
 		if (currentPosition >= 0) {
 			int progress = (int)((currentPosition / duration) * 100);
-			//progress = Math::Max(0, Math::Min(100, progress));
+			progress = Math::Max(0, Math::Min(100, progress));
 
 			// Оновлюємо прогрес-бар
 			tspMain->Minimum = 0;
@@ -691,7 +717,7 @@ private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) 
 		trackBar2->Value = 0;
 	}
 }
-private: System::Void trackBar2_Scroll(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void seekBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
 	if (axWindowsMediaPlayer1->currentMedia != nullptr) {
 			isTrackBar2Scrolling = true; // Починаємо перемотування
 			double newPosition = (trackBar2->Value / 100.0) * duration;
@@ -714,5 +740,40 @@ private: System::Void axWindowsMediaPlayer1_OpenStateChange(System::Object^ send
 		timer1->Start();
 	}
 }
+private: System::Void tsbSave_Click(System::Object^ sender, System::EventArgs^ e) {
+	FolderBrowserDialog^ dialog = gcnew FolderBrowserDialog();
+	if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		selectedFolderPath = dialog->SelectedPath;
+		MessageBox::Show("Папка вибрана: " + selectedFolderPath);
+	}
+}
+private: System::Void timer2_Tick(System::Object^ sender, System::EventArgs^ e) {
+	if (DateTime::Now >= *targetDateTime)
+	{
+		timer2->Stop();
+		if (!String::IsNullOrEmpty(selectedFolderPath))
+		{
+			mediaPlayer->PlayFolder(selectedFolderPath);
+			MessageBox::Show("Плейлист запущено!");
+		}
+		else
+		{
+			MessageBox::Show("Потрібно вибрати папку з відео!");
+		}
+
+	}
+}
+private: System::Void toolStripButton1_Click(System::Object^ sender, System::EventArgs^ e) {
+	CalendarPicker^ picker = gcnew CalendarPicker();
+	if (picker->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+	{
+		targetDateTime = picker->SelectedDateTime;
+		MessageBox::Show("Час встановлено: " + targetDateTime->ToString());
+		timer2->Start();
+
+	}
+}
+
 };
 }

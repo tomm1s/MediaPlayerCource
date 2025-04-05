@@ -117,46 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pbIcon.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF2SURBVDhPxZPfS8JQFMf9W4NegnqJPdTDKMHAB3+FycIm
-        JlozyrmKwYSa6weG2C/pIR8MEiTItyCwpxPfG63crmsroS8MtrNzP+d7z70nFPqlVqQDCqcUcsYDS1Zq
-        BFjZuPsbUNqqUapwTNWTLukXjx/AtBoMqB1dMzf5/UuqmB0bhG88YrzkH7i+c0Yl/Zb0Ro/B8I4YXMJZ
-        Im/433JiQ7MdwQkgcBrPfm1R0eokJnf9AYuqyRxllFNaiBYIi505h/U2++eMcwUgHDnj3wWgEJE9c2wB
-        +NN2cGATBU7c4Z7RovnIpmeOLS8gJgW3ACcf6FB4QLnSpPP7FzJafXYnZ0XJlcMVrzpi3ach9QZvZLUH
-        DDglJMcDi6pFcIBnbdty9QfTAWeA4dKjwLQQ4wPRFySj+tXDK7vUM4urI8nRTJmN3OfUeLpDIip3+kMy
-        b57ZuPEWhGM55kpYTrv+jQj9wrDnqk3WGxRwOgwsAOaWsgw0tjf/oXcZjnOTzrEK+gAAAABJRU5ErkJg
-        gg==
-</value>
-  </data>
-  <data name="pbIcon.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKQSURBVDhPtZTvT1JRGMf5A+uF813LF76ozTVWy2nLTaeN
-        fiiWFBkRJWSmMsFRLUCdgSmVkkyHWJaFOiswQ2X+yja/7fvQuVwuzfWmZ/vuOffePZ/zPec895hM/yNe
-        TqcQGosjND6LYCQO7/PoX9X/LIpYMg1jfVkEhl7h8PAQ+e1dJD+kMRybQWRyHkurWfzY2sFKdlPEMSc2
-        1pcFZydQKb+zj8+ra+KW7gnjMzPfGevLQu9QD6Y4WV3bfVxod2tZibX8buQJkK6Uu58HB9pzT2AEkcV9
-        jC3uiToGp+Q94axtbHfhRSxRChXg9m5BO/si7hfBXQNhjK/8Qiy9J7nz6VuB1VscAjnfdAs2l68USiAB
-        RhFsd/vxbmlTYI7QAlodfnFobr6pAQOjSVxzPC4CuQ8EZHP5klNVwO7UOmz+Cbhbz2CipwE1jR043WAV
-        QP2lTnh8wzLRo4FwAUogYQpELX3LSSbwal8KZ+3DCFyuQMxeKQ6ray0akNnVH4TzYaAI/LK2Ia2hF4HW
-        uz4cr6rBsSqzlqvOteCEuakEyOAByYCW2cQKtLCcRSqdkTGB1tE8bgfWUWvrRXVFwWHlqboy4MUrziKQ
-        kNmPXwXErMbtzj6Ekzm0TeRRl8jgZOMNgR0JZGsooNL0wqpkOmQfCtT1BJ3dQdzrHZFD0AP1YNMDb0iK
-        J1PLAmKm9EDLnQH4hhLSQlPz36VVuGeaK33whBRQibcK4ewvbzwjjvg+ld7A67kMBkdm0Hy9GyXOVHDJ
-        8blP2lL1QIvdA+ebAjA4/l5gCkiH6o8pC0JbbG5pUrV0TsAitgqXxv3z+MfQ5YvKVvAvMXLKgmCeLMG8
-        F7Xe+rPxFEH/BNMHL1LCeNsYvx0VvwE9THIJJ1BEUwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="lblInfo.Text" xml:space="preserve">
-    <value>Тема роботи " Розробка програмного застосунку 
-для відтворення медіафайлів(медіапрогравач).".
-Застосунок виконано відповідно до індивідуального завдання.
-Застосунок дозволяє:
-1. Відтворювати відео
-2. Відтворювати аудіо
-3. Відкривати плейлист з папки
-4. Відтворювати плейлист у визначений час
-5 Встановлює рівень гучності в залежності від часу</value>
-  </data>
 </root>

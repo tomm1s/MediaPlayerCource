@@ -88,12 +88,14 @@ namespace OSmetod {
 			// 
 			// pbIcon
 			// 
+			this->pbIcon->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbIcon.BackgroundImage")));
 			this->pbIcon->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbIcon.Image")));
 			this->pbIcon->Location = System::Drawing::Point(25, 28);
 			this->pbIcon->Name = L"pbIcon";
 			this->pbIcon->Size = System::Drawing::Size(128, 128);
 			this->pbIcon->TabIndex = 1;
 			this->pbIcon->TabStop = false;
+			this->pbIcon->Click += gcnew System::EventHandler(this, &frmAbout::pbIcon_Click);
 			// 
 			// lblName
 			// 
@@ -102,9 +104,9 @@ namespace OSmetod {
 				static_cast<System::Byte>(204)));
 			this->lblName->Location = System::Drawing::Point(178, 28);
 			this->lblName->Name = L"lblName";
-			this->lblName->Size = System::Drawing::Size(115, 13);
+			this->lblName->Size = System::Drawing::Size(76, 13);
 			this->lblName->TabIndex = 2;
-			this->lblName->Text = L"Назва застосунку";
+			this->lblName->Text = L"MediaPlayer";
 			// 
 			// lblVersion
 			// 
@@ -120,9 +122,9 @@ namespace OSmetod {
 			this->lblAuthor->AutoSize = true;
 			this->lblAuthor->Location = System::Drawing::Point(178, 87);
 			this->lblAuthor->Name = L"lblAuthor";
-			this->lblAuthor->Size = System::Drawing::Size(202, 13);
+			this->lblAuthor->Size = System::Drawing::Size(190, 26);
 			this->lblAuthor->TabIndex = 4;
-			this->lblAuthor->Text = L"Розробник: ст. гр. ПІ-ХХ Прізвище Імя";
+			this->lblAuthor->Text = L"Розробник: ст. гр. 2ПІ-22Б Сентюрін\n Євгеній";
 			this->lblAuthor->Click += gcnew System::EventHandler(this, &frmAbout::label1_Click);
 			// 
 			// lblRights
@@ -148,11 +150,9 @@ namespace OSmetod {
 			this->lblInfo->AutoSize = true;
 			this->lblInfo->Location = System::Drawing::Point(11, 22);
 			this->lblInfo->Name = L"lblInfo";
-			this->lblInfo->Size = System::Drawing::Size(324, 104);
+			this->lblInfo->Size = System::Drawing::Size(324, 117);
 			this->lblInfo->TabIndex = 7;
-			this->lblInfo->Text = L"Тема роботи \"Назва теми\".\r\nЗастосунок виконано відповідно до індивідуального завд"
-				L"ання.\r\nЗастосунок дозволяє:\r\n1. задача\r\n2. задача\r\n3. задача\r\n4. задача\r\n5 задач"
-				L"а";
+			this->lblInfo->Text = resources->GetString(L"lblInfo.Text");
 			// 
 			// frmAbout
 			// 
@@ -187,6 +187,8 @@ private: System::Void btnClose_Click(System::Object^ sender, System::EventArgs^ 
 private: System::Void frmAbout_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
 	e->Cancel = true;
 	Hide();
+}
+private: System::Void pbIcon_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
