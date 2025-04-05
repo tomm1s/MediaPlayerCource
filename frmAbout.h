@@ -89,7 +89,6 @@ namespace OSmetod {
 			// pbIcon
 			// 
 			this->pbIcon->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbIcon.BackgroundImage")));
-			this->pbIcon->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pbIcon.Image")));
 			this->pbIcon->Location = System::Drawing::Point(25, 28);
 			this->pbIcon->Name = L"pbIcon";
 			this->pbIcon->Size = System::Drawing::Size(128, 128);
@@ -153,6 +152,7 @@ namespace OSmetod {
 			this->lblInfo->Size = System::Drawing::Size(324, 117);
 			this->lblInfo->TabIndex = 7;
 			this->lblInfo->Text = resources->GetString(L"lblInfo.Text");
+			this->lblInfo->Click += gcnew System::EventHandler(this, &frmAbout::lblInfo_Click);
 			// 
 			// frmAbout
 			// 
@@ -189,6 +189,8 @@ private: System::Void frmAbout_FormClosing(System::Object^ sender, System::Windo
 	Hide();
 }
 private: System::Void pbIcon_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void lblInfo_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

@@ -32,6 +32,8 @@ namespace OSmetod {
 			mediaPlayer = gcnew MediaPlayer(this->axWindowsMediaPlayer1,this->trackBar1);
 			mediaPlayer->SetVolumeBasedOnTime();
 //			axWindowsMediaPlayer1->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
+			this->KeyPreview = true;
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &frmMain::frmMain_KeyDown);
 		}
 
 	protected:
@@ -48,9 +50,9 @@ namespace OSmetod {
 	private: bool isTrackBar2Scrolling = false;
 	private: System::Windows::Forms::MenuStrip^ mnsMain;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiFile;
-	private: System::Windows::Forms::ToolStripMenuItem^ tsmiNew;
+
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiLoad;
-	private: System::Windows::Forms::ToolStripMenuItem^ tsmiSave;
+
 	protected:
 
 	protected:
@@ -67,7 +69,7 @@ namespace OSmetod {
 
 
 	private: System::Windows::Forms::ToolStrip^ tsMain;
-	private: System::Windows::Forms::ToolStripButton^ tsbNew;
+
 	private: System::Windows::Forms::ToolStripButton^ tsbOpen;
 	private: System::Windows::Forms::ToolStripButton^ tsbSave;
 
@@ -110,6 +112,11 @@ namespace OSmetod {
 	private: System::Windows::Forms::ToolStripButton^ toolStripButton1;
 
 	private: String^ selectedFolderPath;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton2;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton3;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton4;
+	private: System::Windows::Forms::ToolStripMenuItem^ âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ïîâíîåêðàíèéÐåæèìToolStripMenuItem;
 	private: DateTime^ targetDateTime;
 
 	private:
@@ -129,26 +136,28 @@ namespace OSmetod {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(frmMain::typeid));
 			this->mnsMain = (gcnew System::Windows::Forms::MenuStrip());
 			this->tsmiFile = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tsmiNew = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiLoad = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tsmiSave = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsmiClose = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiProcess = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiStart = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiParams = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiInfo = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiHelp = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tmsiAbout = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsMain = (gcnew System::Windows::Forms::ToolStrip());
-			this->tsbNew = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbOpen = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbSave = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsbExecute = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbCancel = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton2 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton4 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsbAbout = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tsbexit = (gcnew System::Windows::Forms::ToolStripButton());
@@ -196,20 +205,13 @@ namespace OSmetod {
 			// 
 			// tsmiFile
 			// 
-			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
-				this->tsmiNew, this->tsmiLoad,
-					this->tsmiSave, this->toolStripMenuItem1, this->tsmiClose
+			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->tsmiLoad, this->toolStripMenuItem1,
+					this->tsmiClose
 			});
 			this->tsmiFile->Name = L"tsmiFile";
 			this->tsmiFile->Size = System::Drawing::Size(48, 20);
 			this->tsmiFile->Text = L"Ôàéë";
-			// 
-			// tsmiNew
-			// 
-			this->tsmiNew->Name = L"tsmiNew";
-			this->tsmiNew->Size = System::Drawing::Size(124, 22);
-			this->tsmiNew->Text = L"Íîâèé";
-			this->tsmiNew->Click += gcnew System::EventHandler(this, &frmMain::tsbNew_Click);
 			// 
 			// tsmiLoad
 			// 
@@ -217,12 +219,6 @@ namespace OSmetod {
 			this->tsmiLoad->Size = System::Drawing::Size(124, 22);
 			this->tsmiLoad->Text = L"Â³äêðèòè";
 			this->tsmiLoad->Click += gcnew System::EventHandler(this, &frmMain::tsmiLoad_Click);
-			// 
-			// tsmiSave
-			// 
-			this->tsmiSave->Name = L"tsmiSave";
-			this->tsmiSave->Size = System::Drawing::Size(124, 22);
-			this->tsmiSave->Text = L"Çáåðåãòè";
 			// 
 			// toolStripMenuItem1
 			// 
@@ -238,31 +234,48 @@ namespace OSmetod {
 			// 
 			// tsmiProcess
 			// 
-			this->tsmiProcess->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->tsmiProcess->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->tsmiStart,
-					this->tsmiStop, this->tmsiParams
+					this->tsmiStop, this->tmsiParams, this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem, this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem
 			});
 			this->tsmiProcess->Name = L"tsmiProcess";
-			this->tsmiProcess->Size = System::Drawing::Size(61, 20);
-			this->tsmiProcess->Text = L"Ïðîöåñ";
+			this->tsmiProcess->Size = System::Drawing::Size(72, 20);
+			this->tsmiProcess->Text = L"Êîíòðîëü";
 			// 
 			// tsmiStart
 			// 
 			this->tsmiStart->Name = L"tsmiStart";
-			this->tsmiStart->Size = System::Drawing::Size(136, 22);
-			this->tsmiStart->Text = L"Ïî÷àòè";
+			this->tsmiStart->Size = System::Drawing::Size(206, 22);
+			this->tsmiStart->Text = L"Ñòàðò";
+			this->tsmiStart->Click += gcnew System::EventHandler(this, &frmMain::tsmiStart_Click);
 			// 
 			// tsmiStop
 			// 
 			this->tsmiStop->Name = L"tsmiStop";
-			this->tsmiStop->Size = System::Drawing::Size(136, 22);
+			this->tsmiStop->Size = System::Drawing::Size(206, 22);
 			this->tsmiStop->Text = L"Çóïèíèòè";
+			this->tsmiStop->Click += gcnew System::EventHandler(this, &frmMain::tsmiStop_Click);
 			// 
 			// tmsiParams
 			// 
 			this->tmsiParams->Name = L"tmsiParams";
-			this->tmsiParams->Size = System::Drawing::Size(136, 22);
-			this->tmsiParams->Text = L"Ïàðàìåòðè";
+			this->tmsiParams->Size = System::Drawing::Size(206, 22);
+			this->tmsiParams->Text = L"Ïàóçà";
+			this->tmsiParams->Click += gcnew System::EventHandler(this, &frmMain::tmsiParams_Click);
+			// 
+			// âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem
+			// 
+			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Name = L"âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem";
+			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Size = System::Drawing::Size(206, 22);
+			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Text = L"Âèìêíóòè\\Óâ³êíóòè çâóê";
+			this->âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMain::âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem_Click);
+			// 
+			// ïîâíîåêðàíèéÐåæèìToolStripMenuItem
+			// 
+			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Name = L"ïîâíîåêðàíèéÐåæèìToolStripMenuItem";
+			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Size = System::Drawing::Size(206, 22);
+			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Text = L"Ïîâíîåêðàíèé ðåæèì";
+			this->ïîâíîåêðàíèéÐåæèìToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmMain::ïîâíîåêðàíèéÐåæèìToolStripMenuItem_Click);
 			// 
 			// tmsiInfo
 			// 
@@ -274,39 +287,29 @@ namespace OSmetod {
 			// tmsiHelp
 			// 
 			this->tmsiHelp->Name = L"tmsiHelp";
-			this->tmsiHelp->Size = System::Drawing::Size(154, 22);
+			this->tmsiHelp->Size = System::Drawing::Size(180, 22);
 			this->tmsiHelp->Text = L"Äîïîìîãà";
+			this->tmsiHelp->Click += gcnew System::EventHandler(this, &frmMain::tmsiHelp_Click);
 			// 
 			// tmsiAbout
 			// 
 			this->tmsiAbout->Name = L"tmsiAbout";
-			this->tmsiAbout->Size = System::Drawing::Size(154, 22);
+			this->tmsiAbout->Size = System::Drawing::Size(180, 22);
 			this->tmsiAbout->Text = L"Ïðî ïðîãðàìó";
 			this->tmsiAbout->Click += gcnew System::EventHandler(this, &frmMain::tmsiAbout_Click);
 			// 
 			// tsMain
 			// 
 			this->tsMain->ImageScalingSize = System::Drawing::Size(32, 32);
-			this->tsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(11) {
-				this->tsbNew, this->tsbOpen,
-					this->tsbSave, this->toolStripButton1, this->toolStripSeparator1, this->tsbExecute, this->tsbCancel, this->toolStripSeparator2,
-					this->tsbAbout, this->tsbexit, this->tsbInfo
+			this->tsMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(13) {
+				this->tsbOpen, this->tsbSave,
+					this->toolStripButton1, this->toolStripSeparator1, this->tsbExecute, this->tsbCancel, this->toolStripButton2, this->toolStripButton3,
+					this->toolStripButton4, this->toolStripSeparator2, this->tsbAbout, this->tsbexit, this->tsbInfo
 			});
 			this->tsMain->Location = System::Drawing::Point(0, 24);
 			this->tsMain->Name = L"tsMain";
 			this->tsMain->Size = System::Drawing::Size(768, 39);
 			this->tsMain->TabIndex = 1;
-			// 
-			// tsbNew
-			// 
-			this->tsbNew->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbNew->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbNew.Image")));
-			this->tsbNew->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbNew->Name = L"tsbNew";
-			this->tsbNew->Size = System::Drawing::Size(36, 36);
-			this->tsbNew->Text = L"Íîâèé";
-			this->tsbNew->TextImageRelation = System::Windows::Forms::TextImageRelation::ImageAboveText;
-			this->tsbNew->Click += gcnew System::EventHandler(this, &frmMain::tsbNew_Click);
 			// 
 			// tsbOpen
 			// 
@@ -361,6 +364,38 @@ namespace OSmetod {
 			this->tsbCancel->Name = L"tsbCancel";
 			this->tsbCancel->Size = System::Drawing::Size(36, 36);
 			this->tsbCancel->Text = L"toolStripButton6";
+			this->tsbCancel->Click += gcnew System::EventHandler(this, &frmMain::tsbCancel_Click);
+			// 
+			// toolStripButton2
+			// 
+			this->toolStripButton2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->toolStripButton2->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton2.Image")));
+			this->toolStripButton2->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton2->Name = L"toolStripButton2";
+			this->toolStripButton2->Size = System::Drawing::Size(36, 36);
+			this->toolStripButton2->Text = L"toolStripButton2";
+			this->toolStripButton2->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton2_Click);
+			// 
+			// toolStripButton3
+			// 
+			this->toolStripButton3->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton3.Image")));
+			this->toolStripButton3->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton3->Name = L"toolStripButton3";
+			this->toolStripButton3->Size = System::Drawing::Size(36, 36);
+			this->toolStripButton3->Text = L"toolStripButton3";
+			this->toolStripButton3->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton3_Click);
+			// 
+			// toolStripButton4
+			// 
+			this->toolStripButton4->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton4->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton4.Image")));
+			this->toolStripButton4->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton4->Name = L"toolStripButton4";
+			this->toolStripButton4->Size = System::Drawing::Size(36, 36);
+			this->toolStripButton4->Text = L"toolStripButton4";
+			this->toolStripButton4->Click += gcnew System::EventHandler(this, &frmMain::toolStripButton4_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -424,7 +459,7 @@ namespace OSmetod {
 			this->tslInfo->AutoSize = false;
 			this->tslInfo->Name = L"tslInfo";
 			this->tslInfo->Size = System::Drawing::Size(120, 17);
-			this->tslInfo->Text = L"²íôîðìàö³ÿ";
+			this->tslInfo->Text = L"Â³äòâîðåííÿ â³äåî";
 			this->tslInfo->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// tspMain
@@ -505,6 +540,8 @@ namespace OSmetod {
 			// 
 			// button3
 			// 
+			this->button3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.BackgroundImage")));
+			this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->button3->Location = System::Drawing::Point(119, 3);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
@@ -515,22 +552,25 @@ namespace OSmetod {
 			// 
 			// button4
 			// 
+			this->button4->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button4.BackgroundImage")));
+			this->button4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->button4->Location = System::Drawing::Point(200, 3);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(75, 23);
 			this->button4->TabIndex = 4;
-			this->button4->Text = L"Mute";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &frmMain::button4_Click);
 			// 
 			// button5
 			// 
+			this->button5->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button5.BackgroundImage")));
+			this->button5->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->button5->Location = System::Drawing::Point(281, 3);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(75, 23);
 			this->button5->TabIndex = 5;
-			this->button5->Text = L"button5";
 			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &frmMain::button5_Click);
 			// 
 			// trackBar1
 			// 
@@ -580,6 +620,7 @@ namespace OSmetod {
 			this->Controls->Add(this->stMain);
 			this->Controls->Add(this->tsMain);
 			this->Controls->Add(this->mnsMain);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->mnsMain;
 			this->Name = L"frmMain";
 			this->Text = L"MediaPlayer";
@@ -608,7 +649,7 @@ namespace OSmetod {
 		frmabout->ShowDialog();
 	}
 private: System::Void tsbExecute_Click(System::Object^ sender, System::EventArgs^ e) {
-
+	mediaPlayer->Play();
 }
 private: System::Void tsbNew_Click(System::Object^ sender, System::EventArgs^ e) {
 	CalendarPicker^ calendar = gcnew CalendarPicker();
@@ -634,45 +675,33 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void axWindowsMediaPlayer1_Enter_1(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void Play_button_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (mediaPlayer != nullptr) {
-		timer1->Interval = 1000; // Íà âñÿ âèïàäîê ÿâíî çàäàºìî ³íòåðâàë
-		timer1->Enabled = true;
 		mediaPlayer->Play();
-	}
 }
 private: System::Void tsmiLoad_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (mediaPlayer != nullptr) {
-		timer1->Interval = 1000; // Íà âñÿ âèïàäîê ÿâíî çàäàºìî ³íòåðâàë
-		timer1->Enabled = true;
-		mediaPlayer->Play();
-	}
+	mediaPlayer->OpenAndPlayVideo();
 }
 private: System::Void tsbOpen_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (mediaPlayer != nullptr) {
 		mediaPlayer->OpenAndPlayVideo();
-	}
 
 }
 private: System::Void tspMain_Click(System::Object^ sender, System::EventArgs^ e) {
 
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (mediaPlayer != nullptr) {
-		timer1->Stop();
 		mediaPlayer->Stop();
-		tspMain->Value = 0;
-		trackBar2->Value = 0;
-	}
+
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (mediaPlayer != nullptr) {
 		mediaPlayer->ToggleMute();
 		// Update button appearance based on mute state
 		if (mediaPlayer->IsMuted()) {
-			button4->Text = L"Unmute";
+			button4->BackgroundImage = Image::FromFile("sound_off.png");
+			button4->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 		else {
-			button4->Text = L"Mute";
+			button4->BackgroundImage = Image::FromFile("sound_on.png");
+			button4->BackgroundImageLayout = ImageLayout::Zoom;
 		}
 	}
 }
@@ -775,5 +804,101 @@ private: System::Void toolStripButton1_Click(System::Object^ sender, System::Eve
 	}
 }
 
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (this->FormBorderStyle == System::Windows::Forms::FormBorderStyle::None) {
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+		this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+		this->TopMost = false;
+	}
+	else
+	{
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+		this->TopMost = true;
+	}
+}
+private: System::Void frmMain_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
+{
+	if (e->KeyCode == System::Windows::Forms::Keys::Escape)
+	{
+		if (this->FormBorderStyle == System::Windows::Forms::FormBorderStyle::None)
+		{
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+			this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+			this->TopMost = true;
+		}
+	}
+}
+private: System::Void toolStripButton2_Click(System::Object^ sender, System::EventArgs^ e) {
+	mediaPlayer->Pause();
+}
+private: System::Void tsbCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+	mediaPlayer->Stop();
+}
+private: System::Void toolStripButton3_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (mediaPlayer != nullptr) {
+		mediaPlayer->ToggleMute();
+		// Update button appearance based on mute state
+		if (mediaPlayer->IsMuted()) {
+			button4->BackgroundImage = Image::FromFile("sound_off.png");
+			button4->BackgroundImageLayout = ImageLayout::Zoom;
+		}
+		else {
+			button4->BackgroundImage = Image::FromFile("sound_on.png");
+			button4->BackgroundImageLayout = ImageLayout::Zoom;
+		}
+	}
+}
+private: System::Void toolStripButton4_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (this->FormBorderStyle == System::Windows::Forms::FormBorderStyle::None) {
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+		this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+		this->TopMost = false;
+	}
+	else
+	{
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+		this->TopMost = true;
+	}
+}
+private: System::Void tsmiStart_Click(System::Object^ sender, System::EventArgs^ e) {
+	mediaPlayer->Play();
+}
+private: System::Void tsmiStop_Click(System::Object^ sender, System::EventArgs^ e) {
+	mediaPlayer->Stop();
+}
+private: System::Void tmsiParams_Click(System::Object^ sender, System::EventArgs^ e) {
+	mediaPlayer->Pause();
+}
+private: System::Void âèìêíóòèÓâ³êíóòèÇâóêToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (mediaPlayer != nullptr) {
+		mediaPlayer->ToggleMute();
+		// Update button appearance based on mute state
+		if (mediaPlayer->IsMuted()) {
+			button4->BackgroundImage = Image::FromFile("sound_off.png");
+			button4->BackgroundImageLayout = ImageLayout::Zoom;
+		}
+		else {
+			button4->BackgroundImage = Image::FromFile("sound_on.png");
+			button4->BackgroundImageLayout = ImageLayout::Zoom;
+		}
+	}
+}
+private: System::Void ïîâíîåêðàíèéÐåæèìToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (this->FormBorderStyle == System::Windows::Forms::FormBorderStyle::None) {
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+		this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+		this->TopMost = false;
+	}
+	else
+	{
+		this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+		this->TopMost = true;
+	}
+}
+private: System::Void tmsiHelp_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
