@@ -68,9 +68,8 @@ namespace OSmetod {
 			// dateTimePicker1
 			// 
 			this->dateTimePicker1->Location = System::Drawing::Point(18, 202);
-			this->dateTimePicker1->Format = DateTimePickerFormat::Time;
-			this->dateTimePicker1->ShowUpDown = true;
 			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->ShowUpDown = true;
 			this->dateTimePicker1->Size = System::Drawing::Size(227, 20);
 			this->dateTimePicker1->TabIndex = 1;
 			// 
@@ -92,6 +91,7 @@ namespace OSmetod {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->monthCalendar1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"CalendarPicker";
 			this->Text = L"CalendarPicker";
 			this->ResumeLayout(false);

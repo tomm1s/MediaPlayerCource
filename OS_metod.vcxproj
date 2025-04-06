@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="MediaPlayer.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OS_metod.rc" />
