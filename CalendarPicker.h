@@ -67,6 +67,7 @@ namespace OSmetod {
 			// 
 			// dateTimePicker1
 			// 
+			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Time;
 			this->dateTimePicker1->Location = System::Drawing::Point(18, 202);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->ShowUpDown = true;
