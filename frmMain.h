@@ -25,13 +25,13 @@ namespace OSmetod {
 		frmMain(void)
 		{
 			InitializeComponent();
-			
+
 			//
 			//TODO: Add the constructor code here
 			//
-			mediaPlayer = gcnew MediaPlayer(this->WindowsMediaPlayer,this->flpVolumeBar);
+			mediaPlayer = gcnew MediaPlayer(this->WindowsMediaPlayer, this->flpVolumeBar);
 			mediaPlayer->SetVolumeBasedOnTime();
-//			axWindowsMediaPlayer1->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
+			//			axWindowsMediaPlayer1->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
 			this->KeyPreview = true;
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &frmMain::frmMain_KeyDown);
 		}
@@ -115,6 +115,8 @@ namespace OSmetod {
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiFullScreen;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiPlaylist;
 	private: System::Windows::Forms::ToolStripMenuItem^ tsmiTime;
+	private: System::Windows::Forms::Splitter^ splitter1;
+	private: System::Windows::Forms::ListBox^ listBox1;
 	private: DateTime^ targetDateTime;
 
 	private:
@@ -178,6 +180,8 @@ namespace OSmetod {
 			this->flpVolumeBar = (gcnew System::Windows::Forms::TrackBar());
 			this->flpSeekBar = (gcnew System::Windows::Forms::TrackBar());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->splitter1 = (gcnew System::Windows::Forms::Splitter());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->mnsMain->SuspendLayout();
@@ -501,10 +505,10 @@ namespace OSmetod {
 			// 
 			this->WindowsMediaPlayer->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->WindowsMediaPlayer->Enabled = true;
-			this->WindowsMediaPlayer->Location = System::Drawing::Point(0, 0);
+			this->WindowsMediaPlayer->Location = System::Drawing::Point(120, 0);
 			this->WindowsMediaPlayer->Name = L"WindowsMediaPlayer";
 			this->WindowsMediaPlayer->OcxState = (cli::safe_cast<System::Windows::Forms::AxHost::State^>(resources->GetObject(L"WindowsMediaPlayer.OcxState")));
-			this->WindowsMediaPlayer->Size = System::Drawing::Size(768, 418);
+			this->WindowsMediaPlayer->Size = System::Drawing::Size(648, 418);
 			this->WindowsMediaPlayer->TabIndex = 0;
 			this->WindowsMediaPlayer->OpenStateChange += gcnew AxWMPLib::_WMPOCXEvents_OpenStateChangeEventHandler(this, &frmMain::axWindowsMediaPlayer1_OpenStateChange);
 			this->WindowsMediaPlayer->PositionChange += gcnew AxWMPLib::_WMPOCXEvents_PositionChangeEventHandler(this, &frmMain::domediaposchange);
@@ -523,9 +527,9 @@ namespace OSmetod {
 			this->flpMain->Controls->Add(this->flpVolumeBar);
 			this->flpMain->Controls->Add(this->flpSeekBar);
 			this->flpMain->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->flpMain->Location = System::Drawing::Point(0, 386);
+			this->flpMain->Location = System::Drawing::Point(120, 386);
 			this->flpMain->Name = L"flpMain";
-			this->flpMain->Size = System::Drawing::Size(768, 32);
+			this->flpMain->Size = System::Drawing::Size(648, 32);
 			this->flpMain->TabIndex = 6;
 			this->flpMain->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &frmMain::flowLayoutPanel1_Paint);
 			// 
@@ -609,13 +613,33 @@ namespace OSmetod {
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
+			this->panel1->Controls->Add(this->splitter1);
 			this->panel1->Controls->Add(this->flpMain);
 			this->panel1->Controls->Add(this->WindowsMediaPlayer);
+			this->panel1->Controls->Add(this->listBox1);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(0, 63);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(768, 418);
 			this->panel1->TabIndex = 3;
+			// 
+			// splitter1
+			// 
+			this->splitter1->Location = System::Drawing::Point(120, 0);
+			this->splitter1->Name = L"splitter1";
+			this->splitter1->Size = System::Drawing::Size(3, 386);
+			this->splitter1->TabIndex = 8;
+			this->splitter1->TabStop = false;
+			// 
+			// listBox1
+			// 
+			this->listBox1->Dock = System::Windows::Forms::DockStyle::Left;
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(0, 0);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(120, 418);
+			this->listBox1->TabIndex = 7;
+			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &frmMain::listBox1_SelectedIndexChanged);
 			// 
 			// timer1
 			// 
@@ -656,115 +680,117 @@ namespace OSmetod {
 
 		}
 #pragma endregion
-		private: frmAbout^ frmabout;
-			   double duration = 0.0;
+	private: frmAbout^ frmabout;
+		   double duration = 0.0;
+		   String^ selctedFolderPath;
+		   System::Collections::Generic::List<String^>^ videoFiles;
 
-private: System::Void tmsiAbout_Click(System::Object^ sender, System::EventArgs^ e) {
-	frmabout->ShowDialog();
-}
-private: System::Void tsbAbout_Click(System::Object^ sender, System::EventArgs^ e) {
-	frmabout->ShowDialog();
-}
-private: System::Void tsbPlay_Click(System::Object^ sender, System::EventArgs^ e) {
-	mediaPlayer->Play();
-}
-private: System::Void tsbNew_Click(System::Object^ sender, System::EventArgs^ e) {
-	CalendarPicker^ calendar = gcnew CalendarPicker();
-	
-	calendar->ShowDialog(this);
-}
-private: System::Void tsbClose_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
-private: System::Void tsbInfo_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("Information");
-}
-private: System::Void frmMain_Load(System::Object^ sender, System::EventArgs^ e) {
-	frmabout = gcnew frmAbout();
-}
-private: System::Void axWindowsMediaPlayer1_Enter(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-}
-private: System::Void btnPause_Click(System::Object^ sender, System::EventArgs^ e) {
-	mediaPlayer->Pause();
-}
-private: System::Void axWindowsMediaPlayer1_Enter_1(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void Play_button_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void tmsiAbout_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmabout->ShowDialog();
+	}
+	private: System::Void tsbAbout_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmabout->ShowDialog();
+	}
+	private: System::Void tsbPlay_Click(System::Object^ sender, System::EventArgs^ e) {
 		mediaPlayer->Play();
-}
-private: System::Void tsmiLoad_Click(System::Object^ sender, System::EventArgs^ e) {
-	mediaPlayer->OpenAndPlayVideo();
-}
-private: System::Void tsbLoad_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void tsbNew_Click(System::Object^ sender, System::EventArgs^ e) {
+		CalendarPicker^ calendar = gcnew CalendarPicker();
+
+		calendar->ShowDialog(this);
+	}
+	private: System::Void tsbClose_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+	private: System::Void tsbInfo_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Information");
+	}
+	private: System::Void frmMain_Load(System::Object^ sender, System::EventArgs^ e) {
+		frmabout = gcnew frmAbout();
+	}
+	private: System::Void axWindowsMediaPlayer1_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void flowLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
+	private: System::Void btnPause_Click(System::Object^ sender, System::EventArgs^ e) {
+		mediaPlayer->Pause();
+	}
+	private: System::Void axWindowsMediaPlayer1_Enter_1(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void Play_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		mediaPlayer->Play();
+	}
+	private: System::Void tsmiLoad_Click(System::Object^ sender, System::EventArgs^ e) {
+		mediaPlayer->OpenAndPlayVideo();
+	}
+	private: System::Void tsbLoad_Click(System::Object^ sender, System::EventArgs^ e) {
 		mediaPlayer->OpenAndPlayVideo();
 
-}
-private: System::Void tspMain_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void tspMain_Click(System::Object^ sender, System::EventArgs^ e) {
 
-}
-private: System::Void btnStop_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void btnStop_Click(System::Object^ sender, System::EventArgs^ e) {
 		mediaPlayer->Stop();
 
-}
-private: System::Void btnMuteUnMute_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (mediaPlayer != nullptr) {
-		mediaPlayer->ToggleMute();
-		// Update button appearance based on mute state
-		if (mediaPlayer->IsMuted()) {
-			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_off.png");
-			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
-		}
-		else {
-			flpMuteUnMute->BackgroundImage = Image::FromFile("sound_on.png");
-			flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
+	}
+	private: System::Void btnMuteUnMute_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (mediaPlayer != nullptr) {
+			mediaPlayer->ToggleMute();
+			// Update button appearance based on mute state
+			if (mediaPlayer->IsMuted()) {
+				flpMuteUnMute->BackgroundImage = Image::FromFile("sound_off.png");
+				flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
+			}
+			else {
+				flpMuteUnMute->BackgroundImage = Image::FromFile("sound_on.png");
+				flpMuteUnMute->BackgroundImageLayout = ImageLayout::Zoom;
+			}
 		}
 	}
-}
 
 
 
-private: System::Void volumeBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
-	mediaPlayer->Volume = flpVolumeBar->Value;
-}
-	   void domediaposchange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_PositionChangeEvent^ e) {
-		   if (flpSeekBar->Focused==false)
-			flpSeekBar->Value = e->newPosition;
-	   }
+	private: System::Void volumeBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
+		mediaPlayer->Volume = flpVolumeBar->Value;
+	}
+		   void domediaposchange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_PositionChangeEvent^ e) {
+			   if (flpSeekBar->Focused == false)
+				   flpSeekBar->Value = e->newPosition;
+		   }
 
-private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-	if (WindowsMediaPlayer->currentMedia != nullptr &&
-		WindowsMediaPlayer->playState == WMPLib::WMPPlayState::wmppsPlaying) {
-		if ((int)duration == 0) return;
-		double currentPosition = WindowsMediaPlayer->Ctlcontrols->currentPosition;
-		if (currentPosition >= 0) {
-			int progress = (int)((currentPosition / duration) * 100);
-			progress = Math::Max(0, Math::Min(100, progress));
+	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (WindowsMediaPlayer->currentMedia != nullptr &&
+			WindowsMediaPlayer->playState == WMPLib::WMPPlayState::wmppsPlaying) {
+			if ((int)duration == 0) return;
+			double currentPosition = WindowsMediaPlayer->Ctlcontrols->currentPosition;
+			if (currentPosition >= 0) {
+				int progress = (int)((currentPosition / duration) * 100);
+				progress = Math::Max(0, Math::Min(100, progress));
 
-			// Оновлюємо прогрес-бар
-			tspMain->Minimum = 0;
-			tspMain->Maximum = 100;
-			tspMain->Value = progress;
+				// Оновлюємо прогрес-бар
+				tspMain->Minimum = 0;
+				tspMain->Maximum = 100;
+				tspMain->Value = progress;
 
-			// Оновлюємо trackBar2 тільки якщо користувач не пересуває його
+				// Оновлюємо trackBar2 тільки якщо користувач не пересуває його
 				flpSeekBar->Minimum = 0;
 				flpSeekBar->Maximum = 100;
 				flpSeekBar->Value = progress;
 
+			}
+			else {
+				tspMain->Value = 0;
+				flpSeekBar->Value = 0;
+			}
 		}
 		else {
 			tspMain->Value = 0;
 			flpSeekBar->Value = 0;
 		}
 	}
-	else {
-		tspMain->Value = 0;
-		flpSeekBar->Value = 0;
-	}
-}
-private: System::Void seekBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
-	if (WindowsMediaPlayer->currentMedia != nullptr) {
+	private: System::Void seekBar_Scroll(System::Object^ sender, System::EventArgs^ e) {
+		if (WindowsMediaPlayer->currentMedia != nullptr) {
 			isTrackBar2Scrolling = true; // Починаємо перемотування
 			double newPosition = (flpSeekBar->Value / 100.0) * duration;
 			WindowsMediaPlayer->Ctlcontrols->currentPosition = newPosition;
@@ -772,28 +798,44 @@ private: System::Void seekBar_Scroll(System::Object^ sender, System::EventArgs^ 
 			// Оновлюємо tspMain вручну, щоб відобразити нову позицію
 			int progress = (int)((newPosition / duration) * 100);
 			tspMain->Value = progress;
-		
 
-	}
-}
 
-private: System::Void axWindowsMediaPlayer1_MediaChange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_MediaChangeEvent^ e) {
-}
-private: System::Void axWindowsMediaPlayer1_OpenStateChange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_OpenStateChangeEvent^ e) {
-	WMPLib::WMPOpenState state = WindowsMediaPlayer->openState;
-	if (state == WMPLib::WMPOpenState::wmposMediaOpen) {
-		duration = WindowsMediaPlayer->currentMedia->duration;
-		timer1->Start();
+		}
 	}
-}
-private: System::Void tsbPlaylist_Click(System::Object^ sender, System::EventArgs^ e) {
-	FolderBrowserDialog^ dialog = gcnew FolderBrowserDialog();
-	if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-	{
-		selectedFolderPath = dialog->SelectedPath;
+
+	private: System::Void axWindowsMediaPlayer1_MediaChange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_MediaChangeEvent^ e) {
+	}
+	private: System::Void axWindowsMediaPlayer1_OpenStateChange(System::Object^ sender, AxWMPLib::_WMPOCXEvents_OpenStateChangeEvent^ e) {
+		WMPLib::WMPOpenState state = WindowsMediaPlayer->openState;
+		if (state == WMPLib::WMPOpenState::wmposMediaOpen) {
+			duration = WindowsMediaPlayer->currentMedia->duration;
+			timer1->Start();
+		}
+	}
+	private: System::Void tsbPlaylist_Click(System::Object^ sender, System::EventArgs^ e) {
+		FolderBrowserDialog^ dialog = gcnew FolderBrowserDialog();
+		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		{
+			selectedFolderPath = dialog->SelectedPath;
+
+			array<String^>^ files = System::IO::Directory::GetFiles(selectedFolderPath);
+			videoFiles = gcnew System::Collections::Generic::List<String^>();
+
+			listBox1->Items->Clear();
+
+			for each(String ^ file in files) {
+				for each(String ^ file in files) {
+					if (file->EndsWith(".mp4") || file->EndsWith(".avi") || file->EndsWith(".mkv") || file->EndsWith(".wmv")) {
+						videoFiles->Add(file);
+						listBox1->Items->Add(System::IO::Path::GetFileName(file));
+					}
+				}
+			}
+			MessageBox::Show("Завантажено " + videoFiles->Count + " відео(файл/ів).");
+		}
 		MessageBox::Show("Папка вибрана: " + selectedFolderPath);
 	}
-}
+
 private: System::Void timer2_Tick(System::Object^ sender, System::EventArgs^ e) {
 	if (DateTime::Now >= *targetDateTime)
 	{
@@ -933,6 +975,13 @@ private: System::Void tsmiTime_Click(System::Object^ sender, System::EventArgs^ 
 		MessageBox::Show("Час встановлено: " + targetDateTime->ToString());
 		timer2->Start();
 
+	}
+}
+private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (listBox1->SelectedIndex != -1 && videoFiles != nullptr) {
+		String^ filepath = videoFiles[listBox1->SelectedIndex];
+		WindowsMediaPlayer->URL = filepath;
+		WindowsMediaPlayer->Ctlcontrols->play();
 	}
 }
 };
